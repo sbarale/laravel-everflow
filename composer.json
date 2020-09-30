@@ -1,0 +1,22 @@
+{
+    "name": "codegreencreative/laravel-everflow",
+    "description": "Laravel wrapper for Everflow API",
+    "keywords": ["laravel", "everflow", "api"],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2",
+        "illuminate/support": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeGreenCreative\\Everflow\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CodeGreenCreative\\Everflow\\EverflowServiceProvider"
+            ]
+        }
+    }
+}
