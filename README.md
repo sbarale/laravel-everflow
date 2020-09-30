@@ -26,9 +26,8 @@ php artisan vendor:publish --provider="CodeGreenCreative\Everflow\EverflowServic
 
 ## Environment
 
-Fill in your Everflow API key and cache store. Default values are used below.
+Fill in your Everflow API key. Default values are used below.
 
 ```
 EVERFLOW_API_KEY=
-EVERFLOW_CACHE=file
 ```
