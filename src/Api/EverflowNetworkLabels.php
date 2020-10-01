@@ -4,7 +4,7 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkLabelsApi
+class EverflowNetworkLabels
 {
     public function all()
     {

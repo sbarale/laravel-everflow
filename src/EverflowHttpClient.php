@@ -31,6 +31,11 @@ class EverflowHttpClient
                 curl_setopt($handle, CURLOPT_PUT, true);
                 break;
 
+            // HTTP PATCH
+            case 'patch':
+                curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                break;
+
             // HTTP DELETE
             case 'delete':
                 curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'DELETE');
@@ -99,5 +104,10 @@ class EverflowHttpClient
     public static function delete($url, $data = [], $options = [])
     {
         return static::request('DELETE', $url, $data, $options);
+    }
+
+    public static function patch($url, $data = [], $options = [])
+    {
+        return static::request('PATCH', $url, $data, $options);
     }
 }

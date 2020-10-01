@@ -6,47 +6,47 @@ class EverflowNetworkApi
 {
     public function labels()
     {
-        return new EverflowNetworkLabelsApi;
+        return new EverflowNetworkLabels;
     }
     
     public function custom()
     {
-        return new EverflowNetworkCustomSettingsApi;
+        return new EverflowNetworkCustomSettings;
     }
     
-    public function settings()
+    public function domains()
     {
-        return new EverflowNetworkSettingsApi;
+        return new EverflowNetworkDomainsSettings;
     }
     
     public function offers()
     {
-        return new EverflowNetworkOffersApi;
+        return new EverflowNetworkOffers;
     }
     
     public function campaigns()
     {
-        return new EverflowNetworkCampaignsApi;
+        return new EverflowNetworkCampaigns;
     }
     
     public function creatives()
     {
-        return new EverflowNetworkCreativesApi;
+        return new EverflowNetworkCreatives;
     }
     
     public function affiliates()
     {
-        return new EverflowNetworkAffiliatesApi;
+        return new EverflowNetworkAffiliates;
     }
     
     public function postbacks()
     {
-        return new EverflowNetworkPostbacksApi;
+        return new EverflowNetworkPostbacks;
     }
     
     public function advertisers()
     {
-        return new EverflowNetworkAdvertisersApi;
+        return new EverflowNetworkAdvertisers;
     }
     
     public function reporting()
