@@ -2,17 +2,18 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
+use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkDomainsSettings
+class EverflowNetworkDomainsSettings extends EverflowApiBase
 {
     public function all()
     {
         return EverflowHttpClient::get('networks/domains/tracking');
     }
 
-    public function get($domain)
+    public function get()
     {
-        return EverflowHttpClient::get('networks/domains/tracking/' . $domain);
+        return EverflowHttpClient::get('networks/domains/tracking/' . $this->id());
     }
 }

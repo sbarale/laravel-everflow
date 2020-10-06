@@ -2,27 +2,18 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
+use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkCustomSettings
+class EverflowNetworkCustomSettings extends EverflowApiBase
 {
-    public function caps()
-    {
-        return new EverflowNetworkCustomCapsSettings;
-    }
-
-    public function scrubrate()
-    {
-        return new EverflowNetworkCustomScrubrateSettings;
-    }
-
-    public function payout()
-    {
-        return new EverflowNetworkCustomPayoutSettings;
-    }
-
-    public function creative()
-    {
-        return new EverflowNetworkCustomCreativeSettings;
-    }
+    /**
+     * Maps endpoints on this API to other APIs
+     */
+    public $childApis = [
+        'caps' => EverflowNetworkCustomCapsSettings::class,
+        'scrubrate' => EverflowNetworkCustomScrubrateSettings::class,
+        'payout' => EverflowNetworkCustomPayoutSettings::class,
+        'creative' => EverflowNetworkCustomCreativeSettings::class,
+    ];
 }

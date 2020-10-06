@@ -2,27 +2,31 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
+use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkCustomPayoutSettings
+class EverflowNetworkCustomPayoutSettings extends EverflowApiBase
 {
     public function all()
     {
         return EverflowHttpClient::get('networks/custom/payoutrevenue');
     }
 
-    public function get($settingId)
+    public function get()
     {
-        return EverflowHttpClient::get('networks/custom/payoutrevenue/' . $settingId);
+        return EverflowHttpClient::get('networks/custom/payoutrevenue/' . $this->id());
     }
 
-    public function add($data = [])
+    public function create($data = [])
     {
         return EverflowHttpClient::post('networks/custom/payoutrevenue', $data);
     }
 
-    public function update($settingIds, $data = [])
+    public function update($data = [])
     {
+        // Gets the IDs
+        $settingIds = $this->id();
+
         if (is_array($settingIds)) {
             // Append setting IDs to $data
             $data['network_custom_payout_revenue_setting_ids'] = $settingIds;
@@ -33,8 +37,8 @@ class EverflowNetworkCustomPayoutSettings
         }
     }
 
-    public function delete($settingIds)
+    public function delete()
     {
-        return EverflowHttpClient::delete('networks/custom/payoutrevenue/' . $settingId);
+        return EverflowHttpClient::delete('networks/custom/payoutrevenue/' . $this->id());
     }
 }

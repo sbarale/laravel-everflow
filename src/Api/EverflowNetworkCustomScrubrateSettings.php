@@ -2,9 +2,10 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
+use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkCustomScrubrateSettings
+class EverflowNetworkCustomScrubrateSettings extends EverflowApiBase
 {
     public function all()
     {
@@ -13,16 +14,19 @@ class EverflowNetworkCustomScrubrateSettings
 
     public function get($settingId)
     {
-        return EverflowHttpClient::get('networks/custom/scrubrate/' . $settingId);
+        return EverflowHttpClient::get('networks/custom/scrubrate/' . $this->id());
     }
 
-    public function add($data = [])
+    public function create($data = [])
     {
         return EverflowHttpClient::post('networks/custom/scrubrate', $data);
     }
 
-    public function update($settingIds, $data = [])
+    public function update($data = [])
     {
+        // Gets the IDs
+        $settingIds = $this->id();
+
         if (is_array($settingIds)) {
             // Append setting IDs to $data
             $data['network_custom_scrub_rate_setting_ids'] = $settingIds;
@@ -33,8 +37,8 @@ class EverflowNetworkCustomScrubrateSettings
         }
     }
 
-    public function delete($settingIds)
+    public function delete()
     {
-        return EverflowHttpClient::delete('networks/custom/scrubrate/' . $settingId);
+        return EverflowHttpClient::delete('networks/custom/scrubrate/' . $this->id());
     }
 }

@@ -2,25 +2,23 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
+use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
-class EverflowNetworkLabels
+class EverflowNetworkLabels extends EverflowApiBase
 {
     public function all()
     {
         return EverflowHttpClient::get('networks/labels');
     }
 
-    public function get($label)
+    public function get()
     {
-        return EverflowHttpClient::get('networks/labels/' . $label);
+        return EverflowHttpClient::get('networks/labels/' . $this->id());
     }
 
-    public function add($label, $data = [])
+    public function create($data = [])
     {
-        // Append label ID to $data
-        $data['label'] = $label;
-
         return EverflowHttpClient::post('networks/labels', $data);
     }
 
@@ -32,8 +30,8 @@ class EverflowNetworkLabels
         return EverflowHttpClient::put('networks/labels', $data);
     }
 
-    public function delete($label)
+    public function delete()
     {
-        return EverflowHttpClient::delete('networks/labels', ['label' => $label]);
+        return EverflowHttpClient::delete('networks/labels', ['label' => $this->id()]);
     }
 }

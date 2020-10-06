@@ -2,55 +2,23 @@
 
 namespace CodeGreenCreative\Everflow\Api;
 
-class EverflowNetworkApi
+use CodeGreenCreative\Everflow\EverflowApiBase;
+
+class EverflowNetworkApi extends EverflowApiBase
 {
-    public function labels()
-    {
-        return new EverflowNetworkLabels;
-    }
-    
-    public function custom()
-    {
-        return new EverflowNetworkCustomSettings;
-    }
-    
-    public function domains()
-    {
-        return new EverflowNetworkDomainsSettings;
-    }
-    
-    public function offers()
-    {
-        return new EverflowNetworkOffers;
-    }
-    
-    public function campaigns()
-    {
-        return new EverflowNetworkCampaigns;
-    }
-    
-    public function creatives()
-    {
-        return new EverflowNetworkCreatives;
-    }
-    
-    public function affiliates()
-    {
-        return new EverflowNetworkAffiliates;
-    }
-    
-    public function postbacks()
-    {
-        return new EverflowNetworkPostbacks;
-    }
-    
-    public function advertisers()
-    {
-        return new EverflowNetworkAdvertisers;
-    }
-    
-    public function reporting()
-    {
-        return new EverflowNetworkReportingApi;
-    }
+    /**
+     * Maps endpoints on this API to other APIs
+     */
+    public $childApis = [
+        'labels' => EverflowNetworkLabels::class,
+        'custom' => EverflowNetworkCustomSettings::class,
+        'domains' => EverflowNetworkDomainsSettings::class,
+        'offers' => EverflowNetworkOffers::class,
+        'campaigns' => EverflowNetworkCampaigns::class,
+        'creatives' => EverflowNetworkCreatives::class,
+        'affiliates' => EverflowNetworkAffiliates::class,
+        'postbacks' => EverflowNetworkPostbacks::class,
+        'advertisers' => EverflowNetworkAdvertisers::class,
+        'reporting' => EverflowNetworkReportingApi::class,
+    ];
 }
