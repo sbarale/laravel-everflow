@@ -86,6 +86,17 @@ class EverflowHttpClient
         return $response;
     }
 
+    public static function route($route, $data = []) {
+        // Replaces route fragments
+        $search = [];
+        $replace = [];
+        foreach ($data as $k => $v) {
+            $search[] = ':' . $k;
+            $replace[] = urlencode($v);
+        }
+        return str_replace($search, $replace, $route);
+    }
+
     public static function get($url, $options = [])
     {
         return static::request('GET', $url, [], $options);

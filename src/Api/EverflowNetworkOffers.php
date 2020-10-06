@@ -7,6 +7,13 @@ use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowNetworkOffers extends EverflowApiBase
 {
+    /**
+     * Maps endpoints on this API to other APIs
+     */
+    public $childApis = [
+        'trackingDomain' => EverflowNetworkOffersTrackingDomain::class,
+    ];
+
     public function all()
     {
         return EverflowHttpClient::get('networks/offers');

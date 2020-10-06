@@ -7,12 +7,16 @@ class EverflowApiBase
     // Maps endpoints on this API to other APIs
     public $childApis = [];
 
+    // The parent API
+    private $_parent = null;
+
     // The ID of current object (if available)
     private $_id = null;
 
-    // Optionally passes an object id to the class
-    public function __construct($objectId = null)
+    // Optionally passes an object id to the class and the parent API
+    public function __construct($parent = null, $objectId = null)
     {
+        $this->_parent = $parent;
         $this->_id = $objectId;
     }
 
@@ -26,12 +30,35 @@ class EverflowApiBase
         }
     }
 
+    // Returns the parent object of a certain type
+    public function parent($type = null)
+    {
+        // If the current parent is null, stop here and do no more processing
+        if (is_null($this->_parent)) {
+            return null;
+        }
+
+        // If no type is passed, return this parent
+        if (is_null($type)) {
+            return $this->_parent;
+        }
+
+        // Tries to compare the parent's type, if matches return it
+        if (is_a($this->parent(), $type)) {
+            return $this->parent();
+        }
+
+        // If no match yet, recurses
+        return $this->parent()->parent($type);
+    }
+
     public function __call($name, $args)
     {
         // Checks if the function is a child API
         if (array_key_exists($name, $this->childApis)) {
             // If the API exists, uses reflection to create a new instance of it and returns it
-            return (new \ReflectionClass($this->childApis[$name]))->newInstanceArgs($args);
+            return (new \ReflectionClass($this->childApis[$name]))
+                ->newInstanceArgs(array_merge([$this], $args));
         }
 
         // Fails if nothing is found
