@@ -9,17 +9,19 @@ class EverflowNetworkCustomCapsSettings extends EverflowApiBase
 {
     public function all()
     {
-        return EverflowHttpClient::get('networks/custom/caps');
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/caps'));
     }
 
     public function get()
     {
-        return EverflowHttpClient::get('networks/custom/caps/' . $this->id());
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/caps/:setting', [
+            'setting' => $this->id(),
+        ]));
     }
 
     public function create($data = [])
     {
-        return EverflowHttpClient::post('networks/custom/caps', $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/custom/caps'), $data);
     }
 
     public function update($data = [])
@@ -30,6 +32,6 @@ class EverflowNetworkCustomCapsSettings extends EverflowApiBase
         // Append setting IDs to $data, must be an array
         $data['network_custom_cap_setting_ids'] = is_array($settingIds) ? $settingIds : [$settingIds];
 
-        return EverflowHttpClient::patch('networks/custom/caps', $data);
+        return EverflowHttpClient::patch(EverflowHttpClient::route('networks/custom/caps'), $data);
     }
 }

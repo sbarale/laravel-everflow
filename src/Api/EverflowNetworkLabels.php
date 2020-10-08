@@ -9,17 +9,19 @@ class EverflowNetworkLabels extends EverflowApiBase
 {
     public function all()
     {
-        return EverflowHttpClient::get('networks/labels');
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/labels'));
     }
 
     public function get()
     {
-        return EverflowHttpClient::get('networks/labels/' . $this->id());
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/labels/:label', [
+            'label' => $this->id(),
+        ]));
     }
 
     public function create($data = [])
     {
-        return EverflowHttpClient::post('networks/labels', $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/labels'), $data);
     }
 
     public function update($label, $data = [])
@@ -27,11 +29,11 @@ class EverflowNetworkLabels extends EverflowApiBase
         // Append label ID to $data
         $data['label'] = $label;
 
-        return EverflowHttpClient::put('networks/labels', $data);
+        return EverflowHttpClient::put(EverflowHttpClient::route('networks/labels'), $data);
     }
 
     public function delete()
     {
-        return EverflowHttpClient::delete('networks/labels', ['label' => $this->id()]);
+        return EverflowHttpClient::delete(EverflowHttpClient::route('networks/labels'), ['label' => $this->id()]);
     }
 }

@@ -13,7 +13,16 @@ class EverflowNetworkOffersTrackingDomain extends EverflowApiBase
             'offerId' => $this->parent(EverflowNetworkOffers::class)->id(),
             'domainId' => $this->id(),
             'affiliateId' => $affiliateId,
-            'urlId' => $urlId
+            'urlId' => $urlId,
+        ]));
+    }
+    
+    public function urls($urlId = 0)
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/offers/:offerId/trackingdomain/:domainId/urls/:urlId', [
+            'offerId' => $this->parent(EverflowNetworkOffers::class)->id(),
+            'domainId' => $this->id(),
+            'urlId' => $urlId,
         ]));
     }
 }

@@ -9,17 +9,19 @@ class EverflowNetworkCustomCreativeSettings extends EverflowApiBase
 {
     public function all()
     {
-        return EverflowHttpClient::get('networks/custom/creative');
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/creative'));
     }
 
     public function get()
     {
-        return EverflowHttpClient::get('networks/custom/creative/' . $this->id());
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/creative/:setting', [
+            'setting' => $this->id(),
+        ]));
     }
 
     public function create($data = [])
     {
-        return EverflowHttpClient::post('networks/custom/creative', $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/custom/creative'), $data);
     }
 
     public function update($data = [])
@@ -31,14 +33,18 @@ class EverflowNetworkCustomCreativeSettings extends EverflowApiBase
             // Append setting IDs to $data
             $data['custom_creative_setting_ids'] = $settingIds;
 
-            return EverflowHttpClient::patch('networks/custom/creative', $data);
+            return EverflowHttpClient::patch(EverflowHttpClient::route('networks/custom/creative'), $data);
         } else {
-            return EverflowHttpClient::put('networks/custom/creative/' . $settingId, $data);
+            return EverflowHttpClient::put(EverflowHttpClient::route('networks/custom/creative/:setting', [
+                'setting' => $settingId,
+            ]), $data);
         }
     }
 
     public function delete()
     {
-        return EverflowHttpClient::delete('networks/custom/creative/' . $this->id());
+        return EverflowHttpClient::delete(EverflowHttpClient::route('networks/custom/creative/:setting', [
+            'setting' => $this->id(),
+        ]));
     }
 }

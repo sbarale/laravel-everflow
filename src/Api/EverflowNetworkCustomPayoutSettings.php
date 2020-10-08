@@ -9,17 +9,19 @@ class EverflowNetworkCustomPayoutSettings extends EverflowApiBase
 {
     public function all()
     {
-        return EverflowHttpClient::get('networks/custom/payoutrevenue');
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/payoutrevenue'));
     }
 
     public function get()
     {
-        return EverflowHttpClient::get('networks/custom/payoutrevenue/' . $this->id());
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/payoutrevenue/:setting', [
+            'setting' => $this->id(),
+        ]));
     }
 
     public function create($data = [])
     {
-        return EverflowHttpClient::post('networks/custom/payoutrevenue', $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/custom/payoutrevenue'), $data);
     }
 
     public function update($data = [])
@@ -31,14 +33,18 @@ class EverflowNetworkCustomPayoutSettings extends EverflowApiBase
             // Append setting IDs to $data
             $data['network_custom_payout_revenue_setting_ids'] = $settingIds;
 
-            return EverflowHttpClient::patch('networks/custom/payoutrevenue', $data);
+            return EverflowHttpClient::patch(EverflowHttpClient::route('networks/custom/payoutrevenue'), $data);
         } else {
-            return EverflowHttpClient::put('networks/custom/payoutrevenue/' . $settingId, $data);
+            return EverflowHttpClient::put(EverflowHttpClient::route('networks/custom/payoutrevenue/:setting', [
+                'setting' => $settingId,
+            ]), $data);
         }
     }
 
     public function delete()
     {
-        return EverflowHttpClient::delete('networks/custom/payoutrevenue/' . $this->id());
+        return EverflowHttpClient::delete(EverflowHttpClient::route('networks/custom/payoutrevenue/:setting', [
+            'setting' => $this->id(),
+        ]));
     }
 }
