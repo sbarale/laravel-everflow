@@ -4,7 +4,7 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
 
-class EverflowNetworkApi extends EverflowApiBase
+class EverflowNetwork extends EverflowApiBase
 {
     /**
      * Maps endpoints on this API to other APIs

@@ -20,10 +20,10 @@ class EverflowNetworkOffers extends EverflowApiBase
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/offers'));
     }
 
-    public function get($offerId)
+    public function get()
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/offers/:offerId', [
-            'offerId' => $offerId
+            'offerId' => $this->id(),
         ]));
     }
 
