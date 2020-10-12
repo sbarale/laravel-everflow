@@ -8,23 +8,23 @@ class EverflowAffiliateOffersTraffic extends EverflowApiBase
 {
     public function controls()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/trafficcontrols'));
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/trafficcontrols'));
     }
 
     public function control($controlId)
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/trafficcontrols/:controlId', [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/trafficcontrols/:controlId', [
             'controlId' => $controlId,
         ]));
     }
 
     public function blocking()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/trafficblocking'));
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/trafficblocking'));
     }
 
     public function blockingStream($options = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliates/blockedvariables'), $options);
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/blockedvariables'), $options);
     }
 }

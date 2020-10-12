@@ -15,24 +15,24 @@ class EverflowAffiliateOffers extends EverflowApiBase
 
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/offers'));
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers'));
     }
 
     public function allRunnable()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/offersrunnable'));
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offersrunnable'));
     }
 
     public function get()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/offers/:offerId', [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers/:offerId', [
             'offerId' => $this->id(),
         ]));
     }
 
     public function trackingUrl($urlId = 0)
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/offers/:offerId/url/:urlId', [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers/:offerId/url/:urlId', [
             'offerId' => $this->id(),
             'urlId' => $urlId,
         ]));
@@ -40,7 +40,7 @@ class EverflowAffiliateOffers extends EverflowApiBase
 
     public function impressionUrl($urlId = 0)
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/offers/:offerId/impressionurl/:urlId', [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers/:offerId/impressionurl/:urlId', [
             'offerId' => $this->id(),
             'urlId' => $urlId,
         ]));
@@ -48,7 +48,7 @@ class EverflowAffiliateOffers extends EverflowApiBase
 
     public function createApplication($data = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliates/offers/:offerId/application', [
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/offers/:offerId/application', [
             'offerId' => $this->id(),
         ]), $data);
     }
