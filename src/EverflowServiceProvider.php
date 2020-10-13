@@ -21,7 +21,6 @@ class EverflowServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        
     }
 
     /**
@@ -33,8 +32,11 @@ class EverflowServiceProvider extends ServiceProvider
     {
         $this->configure();
 
-        App::bind('everflow', function()
-        {
+        $this->publishes([
+            __DIR__ . '/../config/everflow.php' => config_path('everflow.php'),
+        ], 'everflow_config');
+
+        App::bind('everflow', function () {
             return new \CodeGreenCreative\Everflow\Everflow;
         });
     }
