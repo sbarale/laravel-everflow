@@ -4,6 +4,15 @@ namespace CodeGreenCreative\Everflow;
 
 class Everflow
 {
+    public function as($apiKey)
+    {
+        // Tells the API client to auth next request with the passed API key
+        EverflowHttpClient::authNextRequestAs($apiKey);
+
+        // Allows for function chaining
+        return new static;
+    }
+
     public function network()
     {
         return new Api\EverflowNetwork;

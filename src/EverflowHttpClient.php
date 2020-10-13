@@ -6,6 +6,27 @@ class EverflowHttpClient
 {
     private const BASE_URL = 'https://api.eflow.team/v1/';
 
+    private static $nextApiKeys = [];
+
+    private static function nextApiKey()
+    {
+        // Gets next API key from the queue
+        $nextApiKey = array_shift(static::$nextApiKeys);
+
+        // If no API key is used, get from the package's config
+        if (is_null($nextApiKey)) {
+            $nextApiKey = config('everflow.api_key');
+        }
+
+        // Returns the final API key
+        return $nextApiKey;
+    }
+
+    public static function authNextRequestAs($apiKey)
+    {
+        array_push(static::$nextApiKeys, $apiKey);
+    }
+
     public static function request($method, $url, $data = [], $options = [])
     {
         // Start a new cURL session
@@ -53,7 +74,7 @@ class EverflowHttpClient
             isset($options[CURLOPT_HTTPHEADER]) ? $options[CURLOPT_HTTPHEADER] : [],
             array(
                 'Accept: application/json',
-                'X-Eflow-API-Key: ' . config('everflow.api_key'),
+                'X-Eflow-API-Key: ' . static::nextApiKey(),
             )
         );
 
