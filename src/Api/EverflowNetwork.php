@@ -19,6 +19,6 @@ class EverflowNetwork extends EverflowApiBase
         'affiliates' => EverflowNetworkAffiliates::class,
         'postbacks' => EverflowNetworkPostbacks::class,
         'advertisers' => EverflowNetworkAdvertisers::class,
-        'reporting' => EverflowNetworkReportingApi::class,
+        'reporting' => EverflowNetworkReporting::class,
     ];
 }
