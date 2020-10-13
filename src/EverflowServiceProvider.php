@@ -32,9 +32,7 @@ class EverflowServiceProvider extends ServiceProvider
     {
         $this->configure();
 
-        $this->publishes([
-            __DIR__ . '/../config/everflow.php' => config_path('everflow.php'),
-        ], 'everflow_config');
+        $this->offerPublishing();
 
         App::bind('everflow', function () {
             return new \CodeGreenCreative\Everflow\Everflow;
@@ -49,5 +47,19 @@ class EverflowServiceProvider extends ServiceProvider
     private function configure()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/everflow.php', 'everflow');
+    }
+
+    /**
+     * Offer publishing for the service provider
+     *
+     * @return void
+     */
+    public function offerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/everflow.php' => config_path('everflow.php'),
+            ], 'everflow_config');
+        }
     }
 }
