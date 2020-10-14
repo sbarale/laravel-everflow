@@ -57,4 +57,9 @@ class EverflowAffiliateReporting extends EverflowApiBase
             'transactionId' => $transactionId,
         ]));
     }
+
+    public function performance($options = [])
+    {
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/dashboard/performance'), $options);
+    }
 }

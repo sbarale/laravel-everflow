@@ -62,4 +62,9 @@ class EverflowNetworkReporting extends EverflowApiBase
     {
         return EverflowHttpClient::post(EverflowHttpClient::route('networks/reporting/variance'), $options);
     }
+
+    public function performance($options = [])
+    {
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/dashboard/performance'), $options);
+    }
 }
