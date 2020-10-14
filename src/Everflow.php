@@ -13,25 +13,28 @@ class Everflow
         return new $this;
     }
 
-    public function asAffiliate($affiliate, $affiliateUserId = null)
+    public function asAffiliate($affiliate)
     {
-        // If no Affiliate user ID is set, get the token for the first available one
-        if (is_null($affiliateUserId)) {
-            // Gets the affiliate with the current API token
-            $affiliateUsers = $this->network()->affiliates($affiliate)->users()->all();
+        // Gets the Affiliate's API keys
+        $affiliateKeys = $this->network()->affiliates($affiliate)->apikeys()->all();
 
-            // Sets the user ID to first found user
-            $affiliateToken = $affiliateUsers->users[0]->relationship->api->api_key;
-        } else {
-            // If the user is set, only gets the user and their token
-            $affiliateUser = $this->network()->affiliates($affiliate)->users($affiliateUserId)->get();
+        // If no user is present, returns error
+        if (empty($affiliateKeys->keys)) {
+            throw new \Exception("Specified Affiliate does not have any API keys, please check if your Affiliate has valid Users and Keys");
+        }
 
-            // Sets the user ID to first found user
-            $affiliateToken = $affiliateUser->relationship->api->api_key;
+        // Gets the first of the active keys
+        $affiliateKey = collect($affiliateKeys->keys)->filter(function ($key) {
+            return ('active' == $key->key_status);
+        })->first();
+
+        // If no active key is set, returns error
+        if (is_null($affiliateKey)) {
+            throw new \Exception("Specified Affiliate does have API keys but none are active, please check if your Affiliate has valid Users and Keys");
         }
 
         // Allows for function chaining
-        return new $this->as($affiliateToken);
+        return $this->as($affiliateKey->api_key);
     }
 
     public function network()

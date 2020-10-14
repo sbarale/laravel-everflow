@@ -12,6 +12,7 @@ class EverflowNetworkAffiliates extends EverflowApiBase
      */
     public $childApis = [
         'users' => EverflowNetworkAffiliatesUsers::class,
+        'apikeys' => EverflowNetworkAffiliatesKeys::class,
         'domains' => EverflowNetworkAffiliatesDomains::class,
     ];
 
@@ -20,10 +21,10 @@ class EverflowNetworkAffiliates extends EverflowApiBase
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates'));
     }
 
-    public function get($affiliateId)
+    public function get()
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/:affiliateId', [
-            'affiliateId' => $affiliateId
+            'affiliateId' => $this->id(),
         ]));
     }
 

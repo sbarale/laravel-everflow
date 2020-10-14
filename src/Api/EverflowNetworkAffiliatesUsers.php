@@ -9,7 +9,9 @@ class EverflowNetworkAffiliatesUsers extends EverflowApiBase
 {
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/:affiliateId/users'));
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/:affiliateId/users', [
+            'affiliateId' => $this->parent(EverflowNetworkAffiliates::class)->id(),
+        ]));
     }
 
     public function get()
@@ -22,7 +24,9 @@ class EverflowNetworkAffiliatesUsers extends EverflowApiBase
 
     public function create($data = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliates/:affiliateId/users'), $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliates/:affiliateId/users', [
+            'affiliateId' => $this->parent(EverflowNetworkAffiliates::class)->id(),
+        ]), $data);
     }
 
     public function update($data = [])
