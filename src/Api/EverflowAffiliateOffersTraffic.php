@@ -3,6 +3,7 @@
 namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
+use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowAffiliateOffersTraffic extends EverflowApiBase
 {
