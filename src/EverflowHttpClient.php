@@ -35,7 +35,7 @@ class EverflowHttpClient
         // Setup base cURL options
         curl_setopt_array($handle, $options);
         curl_setopt_array($handle, [
-            CURLOPT_HEADER => false,
+            CURLOPT_HEADER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -93,7 +93,12 @@ class EverflowHttpClient
         curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
 
         // Executes request
-        $response = curl_exec($handle);
+        $responseRaw = curl_exec($handle);
+
+        // Extracts response body and headers
+        $responseHeaderSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+        $responseHeaders = substr($responseRaw, 0, $responseHeaderSize);
+        $responseBody = substr($responseRaw, $responseHeaderSize);
 
         // Handles cURL request errors
         if (curl_error($handle)) {
@@ -101,7 +106,7 @@ class EverflowHttpClient
         }
 
         // Parses response JSON
-        $response = json_decode($response);
+        $response = json_decode($responseBody);
 
         // Handles Everflow errors
         if (isset($response->Error)) {
