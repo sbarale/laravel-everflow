@@ -8,23 +8,23 @@ class EverflowApiBase
     public $childApis = [];
 
     // The parent API
-    private $_parent = null;
+    private $parent = null;
 
     // The ID of current object (if available)
-    private $_id = null;
+    private $id = null;
 
     // Optionally passes an object id to the class and the parent API
     public function __construct($parent = null, $objectId = null)
     {
-        $this->_parent = $parent;
-        $this->_id = $objectId;
+        $this->parent = $parent;
+        $this->id = $objectId;
     }
 
     // Returns the object ID or throws an error
     public function id()
     {
-        if (!is_null($this->_id) && $this->_id) {
-            return $this->_id;
+        if (!is_null($this->id) && $this->id) {
+            return $this->id;
         } else {
             throw new \Exception('No object ID was supplied for this query');
         }
@@ -34,13 +34,13 @@ class EverflowApiBase
     public function parent($type = null)
     {
         // If the current parent is null, stop here and do no more processing
-        if (is_null($this->_parent)) {
+        if (is_null($this->parent)) {
             return null;
         }
 
         // If no type is passed, return this parent
         if (is_null($type)) {
-            return $this->_parent;
+            return $this->parent;
         }
 
         // Tries to compare the parent's type, if matches return it
