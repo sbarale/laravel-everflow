@@ -42,6 +42,6 @@ class EverflowNetworkAffiliatesUsers extends EverflowApiBase
         return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/users/:userId/notifications?page_size=:pageSize', [
             'pageSize' => $pageSize,
             'userId' => $this->id(),
-        ]), $data);
+        ]));
     }
 }
