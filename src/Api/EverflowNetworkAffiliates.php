@@ -44,4 +44,20 @@ class EverflowNetworkAffiliates extends EverflowApiBase
             'affiliateId' => $this->id(),
         ]), $data);
     }
+
+    public function notifications($pageSize = 5)
+    {
+        // Fetch the Affiliate's users
+        $users = $this->users()->all()->users;
+
+        // If no users are found, return an error
+        if (empty($users)) {
+            throw new \Exception('The provided Affiliate has no users');
+        }
+
+        // Gets the first user and passes it to the notifications API call
+        $user = $users[0];
+        
+        return $this->users($user->network_affiliate_user_id)->notifications($pageSize);
+    }
 }
