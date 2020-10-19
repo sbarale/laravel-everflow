@@ -75,8 +75,8 @@ class EverflowAffiliateReporting extends EverflowApiBase
 
     public function trendingOffer($offerId, $options = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/dashboard/trending/offers/:offerId'), [
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/dashboard/trending/offers/:offerId', [
             'offerId' => $offerId
-        ], $options);
+        ]), $options);
     }
 }
