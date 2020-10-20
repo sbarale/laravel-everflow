@@ -11,7 +11,7 @@ class EverflowHttpClient
     private static function nextApiKey()
     {
         // Gets next API key from the queue
-        $nextApiKey = array_shift(static::$nextApiKeys);
+        $nextApiKey = array_pop(static::$nextApiKeys);
 
         // If no API key is used, get from the package's config
         if (is_null($nextApiKey)) {
@@ -80,6 +80,8 @@ class EverflowHttpClient
             array(
                 'Accept: application/json',
                 'X-Eflow-API-Key: ' . static::nextApiKey(),
+                'Cache-Control: no-cache',
+                'Pragma: no-cache',
             )
         );
 
@@ -94,6 +96,9 @@ class EverflowHttpClient
 
         // Executes request
         $responseRaw = curl_exec($handle);
+
+        // Debugging only
+        //fwrite(STDERR, static::BASE_URL . $url . "\n\n" . print_r($headers, true) . "\n\n" . $responseRaw . "\n\n");
 
         // Extracts response body and headers
         $responseHeaderSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
