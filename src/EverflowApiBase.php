@@ -2,6 +2,8 @@
 
 namespace CodeGreenCreative\Everflow;
 
+use Illuminate\Support\Facades\Cache;
+
 class EverflowApiBase
 {
     // Maps endpoints on this API to other APIs
@@ -63,5 +65,51 @@ class EverflowApiBase
 
         // Fails if nothing is found
         throw new \Exception("No method or child API with name '{$name}' was found");
+    }
+
+    public function cached($type, $id, $callback)
+    {
+        return Cache::remember("everflow-{$type}-{$id}", 30, $callback);
+    }
+
+    public function as($apiKey)
+    {
+        // Tells the API client to auth next request with the passed API key
+        EverflowHttpClient::authNextRequestAs($apiKey);
+
+        // Allows for function chaining
+        return $this;
+    }
+
+    public function asAdmin()
+    {
+        // Allows for function chaining
+        return $this->as(config('everflow.api_key'));
+    }
+
+    public function asAffiliate($affiliate)
+    {
+        // Gets the Affiliate's API keys
+        $affiliateKeys = $this->cached('affiliate', $affiliate, function () use ($affiliate) {
+            return (new Everflow)->asAdmin()->network()->affiliates($affiliate)->apikeys()->all();
+        });
+
+        // If no user is present, returns error
+        if (empty($affiliateKeys->keys)) {
+            throw new \Exception("Specified Affiliate does not have any API keys, please check if your Affiliate has valid Users and Keys");
+        }
+
+        // Gets the first of the active keys
+        $affiliateKey = collect($affiliateKeys->keys)->filter(function ($key) {
+            return ('active' == $key->key_status);
+        })->first();
+
+        // If no active key is set, returns error
+        if (is_null($affiliateKey)) {
+            throw new \Exception("Specified Affiliate does have API keys but none are active, please check if your Affiliate has valid Users and Keys");
+        }
+
+        // Allows for function chaining
+        return $this->as($affiliateKey->api_key);
     }
 }
