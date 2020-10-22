@@ -18,7 +18,33 @@ class EverflowNetworkAffiliates extends EverflowApiBase
 
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates'));
+        // Store all items here
+        $all = [];
+
+        // Does a first call to fetch objects
+        $response = $this->page();
+
+        // Adds response items to the "all" array
+        $all = array_merge($all, $response->affiliates);
+
+        // Checks if pagination is present
+        if (isset($response->paging)) {
+            // Calculates how many pages are needed
+            $pages = ceil($response->paging->total_count / $response->paging->page_size);
+
+            // Runs through each of the other pages and appends to the array
+            for ($page = 2; $page <= $pages; $page++) {
+                $all = array_merge($all, $this->page($page, $response->paging->page_size)->affiliates);
+            }
+        }
+
+        // Returns the complete set of results
+        return $all;
+    }
+
+    public function page($pageNumber = 1, $pageSize = 500)
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates') . "?page={$pageNumber}&page_size={$pageSize}");
     }
 
     public function get()
