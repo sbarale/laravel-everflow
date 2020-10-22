@@ -35,7 +35,7 @@ class EverflowNetworkAffiliates extends EverflowApiBase
 
     public function signup($data = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliates/signup'), $data);
+        return EverflowHttpClient::post(EverflowHttpClient::route('networks/affiliate/signup'), $data);
     }
 
     public function update($data = [])
