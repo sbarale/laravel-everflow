@@ -4,9 +4,12 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
+use CodeGreenCreative\Everflow\Traits\HasPagination;
 
 class EverflowAffiliateOffers extends EverflowApiBase
 {
+    use HasPagination;
+
     /**
      * Maps endpoints on this API to other APIs
      */
@@ -16,12 +19,12 @@ class EverflowAffiliateOffers extends EverflowApiBase
 
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers'));
+        return $this->pageAll(EverflowHttpClient::route('affiliates/alloffers'), 'offers');
     }
 
     public function allRunnable()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offersrunnable'));
+        return $this->pageAll(EverflowHttpClient::route('affiliates/offersrunnable'), 'offers');
     }
 
     public function get()

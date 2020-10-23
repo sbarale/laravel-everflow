@@ -4,9 +4,12 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
+use CodeGreenCreative\Everflow\Traits\HasPagination;
 
 class EverflowNetworkAffiliates extends EverflowApiBase
 {
+    use HasPagination;
+
     /**
      * Maps endpoints on this API to other APIs
      */
@@ -18,33 +21,7 @@ class EverflowNetworkAffiliates extends EverflowApiBase
 
     public function all()
     {
-        // Store all items here
-        $all = [];
-
-        // Does a first call to fetch objects
-        $response = $this->page();
-
-        // Adds response items to the "all" array
-        $all = array_merge($all, $response->affiliates);
-
-        // Checks if pagination is present
-        if (isset($response->paging)) {
-            // Calculates how many pages are needed
-            $pages = ceil($response->paging->total_count / $response->paging->page_size);
-
-            // Runs through each of the other pages and appends to the array
-            for ($page = 2; $page <= $pages; $page++) {
-                $all = array_merge($all, $this->page($page, $response->paging->page_size)->affiliates);
-            }
-        }
-
-        // Returns the complete set of results
-        return $all;
-    }
-
-    public function page($pageNumber = 1, $pageSize = 500)
-    {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates') . "?page={$pageNumber}&page_size={$pageSize}");
+        return $this->pageAll(EverflowHttpClient::route('networks/affiliates'), 'affiliates');
     }
 
     public function get()

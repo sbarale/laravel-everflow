@@ -4,12 +4,15 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
+use CodeGreenCreative\Everflow\Traits\HasPagination;
 
 class EverflowNetworkCustomCapsSettings extends EverflowApiBase
 {
+    use HasPagination;
+
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/custom/caps'));
+        return $this->pageAll(EverflowHttpClient::route('networks/custom/caps'), 'custom_cap_settings');
     }
 
     public function get()

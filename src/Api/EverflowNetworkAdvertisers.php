@@ -4,9 +4,12 @@ namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
+use CodeGreenCreative\Everflow\Traits\HasPagination;
 
 class EverflowNetworkAdvertisers extends EverflowApiBase
 {
+    use HasPagination;
+
     /**
      * Maps endpoints on this API to other APIs
      */
@@ -16,7 +19,7 @@ class EverflowNetworkAdvertisers extends EverflowApiBase
 
     public function all()
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/advertisers'));
+        return $this->pageAll(EverflowHttpClient::route('networks/advertisers'), 'advertisers');
     }
 
     public function get($advertiserId)
