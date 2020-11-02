@@ -12,13 +12,13 @@ class EverflowNetworkSettings extends EverflowApiBase
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/settings/affiliateportal'));
     }
 
-    public function customFields($slugify = false)
+    public function customFields($withSlugs = true)
     {
         // Gets all the fields
         $fields = collect($this->affiliatePortal()->relationship->custom_fields);
 
         // Optionally slugifies them
-        if ($slugify) {
+        if ($withSlugs) {
             $fields = $fields->map(function ($field) {
                 $field->laravel_everflow_slug = \Str::slug($field->label, '_');
                 return $field;
