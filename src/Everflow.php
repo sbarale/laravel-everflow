@@ -13,5 +13,6 @@ class Everflow extends EverflowApiBase
         'metadata' => Api\EverflowMetadata::class,
         'affiliate' => Api\EverflowAffiliate::class,
         'advertiser' => Api\EverflowAdvertiser::class,
+        'experimental' => Api\Experimental\EverflowExperimental::class,
     ];
 }

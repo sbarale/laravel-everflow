@@ -122,7 +122,7 @@ class EverflowHttpClient
         return $response;
     }
 
-    public static function route($route, $data = []) {
+    public static function route($route, $data = [], $query = []) {
         // Replaces route fragments
         $search = [];
         $replace = [];
@@ -130,7 +130,27 @@ class EverflowHttpClient
             $search[] = ':' . $k;
             $replace[] = urlencode($v);
         }
-        return str_replace($search, $replace, $route);
+
+        // Handles query string parameters
+        $queryParameters = [];
+        foreach ($query as $k => $v) {
+            if (is_array($v)) {
+                // Handles arrays in values
+                $vEncoded = implode(',', array_map('urlencode'));
+            } else {
+                // Encodes all other types of values
+                $vEncoded = urlencode($v);
+            }
+
+            // Adds finished items
+            $queryParameters[] = urlencode($k) . '=' . $vEncoded;
+        }
+
+        // Builds query string if needed
+        $queryString = (count($query) > 0) ? ('?' . implode('&', $queryParameters)) : '';
+
+        // Returns built URL
+        return str_replace($search, $replace, $route) . $queryString;
     }
 
     public static function get($url, $options = [])

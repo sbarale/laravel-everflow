@@ -27,10 +27,12 @@ class EverflowAffiliateOffers extends EverflowApiBase
         return $this->pageAll(EverflowHttpClient::route('affiliates/offersrunnable'), 'offers');
     }
 
-    public function get()
+    public function get($relationships = [])
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/offers/:offerId', [
             'offerId' => $this->id(),
+        ], [
+            'relationships' => $relationships,
         ]));
     }
 
