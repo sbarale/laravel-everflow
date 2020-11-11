@@ -136,7 +136,7 @@ class EverflowHttpClient
         foreach ($query as $k => $v) {
             if (is_array($v)) {
                 // Handles arrays in values
-                $vEncoded = implode(',', array_map('urlencode'));
+                $vEncoded = implode(',', array_map('urlencode', $v));
             } else {
                 // Encodes all other types of values
                 $vEncoded = urlencode($v);
