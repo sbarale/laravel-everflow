@@ -79,4 +79,9 @@ class EverflowAffiliateReporting extends EverflowApiBase
             'offerId' => $offerId
         ]), $options);
     }
+
+    public function referrals($options = [])
+    {
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/reporting/referrals'), $options);
+    }
 }
