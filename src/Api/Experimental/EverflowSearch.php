@@ -28,6 +28,6 @@ class EverflowSearch extends EverflowApiBase
                 'relationship' => $relationship,
             ]),
             $data
-        )->results;
+        );
     }
 }
