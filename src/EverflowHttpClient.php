@@ -98,12 +98,35 @@ class EverflowHttpClient
         $responseRaw = curl_exec($handle);
 
         // Debugging only
-        //fwrite(STDERR, static::BASE_URL . $url . "\n\n" . print_r($headers, true) . "\n\n" . $responseRaw . "\n\n");
+        /*fwrite(
+            (defined('STDERR') ? STDERR : fopen('php://output', 'w')),
+
+            // Request method + URL
+            $method . ' ' . static::BASE_URL . $url . "\n\n" .
+
+            // Request headers
+            print_r($headers, true) . "\n\n" .
+
+            // Request body (if any)
+            (empty($data) ? '' : print_r($data, true) . "\n\n")  .
+
+            // Server response
+            "--------------------------\n\n" .
+            $responseRaw . "\n\n"
+        );*/
 
         // Extracts response body and headers
         $responseHeaderSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
         $responseHeaders = substr($responseRaw, 0, $responseHeaderSize);
+        $responseHeadersArr = array_map('trim', explode("\n", trim($responseHeaders)));
+        $responseHeader0 = array_shift($responseHeadersArr);
+        $responseStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
         $responseBody = substr($responseRaw, $responseHeaderSize);
+
+        // Detects any 5XX errors and handles them
+        if ('5' == strval($responseStatus)[0]) {
+            throw new \Exception("Internal error on Everflow API [{$responseHeader0}] with the following body:\n{$responseBody}");
+        }
 
         // Handles cURL request errors
         if (curl_error($handle)) {
