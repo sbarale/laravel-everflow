@@ -3,6 +3,7 @@
 namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
+use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowAffiliate extends EverflowApiBase
 {
@@ -13,4 +14,11 @@ class EverflowAffiliate extends EverflowApiBase
         'offers' => EverflowAffiliateOffers::class,
         'reporting' => EverflowAffiliateReporting::class,
     ];
+
+    public function network($relationship = [])
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/network', [], [
+            'relationship' => $relationship,
+        ]));
+    }
 }
