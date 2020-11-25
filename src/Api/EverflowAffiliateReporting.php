@@ -7,9 +7,9 @@ use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowAffiliateReporting extends EverflowApiBase
 {
-    public function entity($options = [])
+    public function entity($options = [], $query = [])
     {
-        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/reporting/entity'), $options);
+        return EverflowHttpClient::post(EverflowHttpClient::route('affiliates/reporting/entity', $query), $options);
     }
 
     public function sub($subId, $options = [])
