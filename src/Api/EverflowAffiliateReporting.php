@@ -38,7 +38,7 @@ class EverflowAffiliateReporting extends EverflowApiBase
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/reporting/clicks/:id', [
             'id' => $id,
-        ]), $options);
+        ]));
     }
 
     public function clicks($options = [])
