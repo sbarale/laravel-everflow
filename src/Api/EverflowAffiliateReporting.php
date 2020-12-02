@@ -54,7 +54,7 @@ class EverflowAffiliateReporting extends EverflowApiBase
     public function conversion($conversionId)
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/reporting/conversions/:conversionId', [
-            'conversionid' => $conversionId,
+            'conversionId' => $conversionId,
         ]));
     }
 

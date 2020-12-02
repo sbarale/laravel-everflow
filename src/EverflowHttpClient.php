@@ -123,9 +123,19 @@ class EverflowHttpClient
         $responseStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
         $responseBody = substr($responseRaw, $responseHeaderSize);
 
+        // Detects any 404 errors and handles them
+        if ('404' == strval($responseStatus)) {
+            throw new \Exception("The entity you requested was not found - {$responseHeader0}: {$responseBody}");
+        }
+
+        // Detects any 4XX errors and handles them
+        if ('4' == strval($responseStatus)[0]) {
+            throw new \Exception("4XX error on Everflow API [{$responseHeader0}] with the following body:\n{$responseBody}");
+        }
+
         // Detects any 5XX errors and handles them
         if ('5' == strval($responseStatus)[0]) {
-            throw new \Exception("Internal error on Everflow API [{$responseHeader0}] with the following body:\n{$responseBody}");
+            throw new \Exception("Internal error {$responseStatus} on Everflow API [{$responseHeader0}] with the following body:\n{$responseBody}");
         }
 
         // Handles cURL request errors
