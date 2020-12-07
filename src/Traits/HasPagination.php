@@ -5,12 +5,22 @@ namespace CodeGreenCreative\Everflow\Traits;
 use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 trait HasPagination {
-    public function page($endpoint, $pageNumber = 1, $pageSize = 500)
+    public function page($endpoint, $pageNumber = 1, $pageSize = null)
     {
+        // If the page number is not numeric, default to first page
+        if (!is_numeric($pageNumber)) {
+            $pageNumber = 1;
+        }
+
+        // If the page size is not numeric (or is the default 'null'), get the value from config
+        if (!is_numeric($pageSize)) {
+            $pageSize = config('everflow.per_page');
+        }
+
         return EverflowHttpClient::get($endpoint . "?page={$pageNumber}&page_size={$pageSize}");
     }
 
-    public function pageAll ($endpoint, $field)
+    public function pageAll($endpoint, $field)
     {
         // Store all items here
         $all = [];

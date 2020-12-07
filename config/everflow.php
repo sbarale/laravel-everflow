@@ -16,4 +16,7 @@ return [
 
     // Define the Everflow API key being used
     'api_key' => env('EVERFLOW_API_KEY'),
+
+    // Define how many entities per page the API should be fetching by default
+    'per_page' => 100,
 ];

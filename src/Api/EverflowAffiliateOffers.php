@@ -17,14 +17,32 @@ class EverflowAffiliateOffers extends EverflowApiBase
         'traffic' => EverflowAffiliateOffersTraffic::class,
     ];
 
-    public function all()
+    public function all($page = null, $pageSize = null)
     {
-        return $this->pageAll(EverflowHttpClient::route('affiliates/alloffers'), 'offers');
+        // Endpoint we're requesting
+        $endpoint = EverflowHttpClient::route('affiliates/alloffers');
+
+        // If no page number is provided, fetch all offers without pagination
+        if (is_null($page)) {
+            return $this->pageAll($endpoint, 'offers');
+        }
+        
+        // Otherwise, fetch the supplied page number
+        return $this->page($endpoint, $page, $pageSize);
     }
 
-    public function allRunnable()
+    public function allRunnable($page = null, $pageSize = null)
     {
-        return $this->pageAll(EverflowHttpClient::route('affiliates/offersrunnable'), 'offers');
+        // Endpoint we're requesting
+        $endpoint = EverflowHttpClient::route('affiliates/offersrunnable');
+
+        // If no page number is provided, fetch all offers without pagination
+        if (is_null($page)) {
+            return $this->pageAll($endpoint, 'offers');
+        }
+        
+        // Otherwise, fetch the supplied page number
+        return $this->page($endpoint, $page, $pageSize);
     }
 
     public function get($relationship = [])
