@@ -21,4 +21,19 @@ class EverflowAffiliate extends EverflowApiBase
             'relationship' => $relationship,
         ]));
     }
+
+    public function timezone()
+    {
+        return $this->network('all')->timezone_id;
+    }
+
+    public function address()
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/address'));
+    }
+
+    public function billings()
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/billings'));
+    }
 }
