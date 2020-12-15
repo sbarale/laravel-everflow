@@ -3,14 +3,16 @@
 namespace CodeGreenCreative\Everflow\Api\Experimental;
 
 use Illuminate\Support\Facades\Cache;
+use CodeGreenCreative\Everflow\EverflowApiBase;
+use CodeGreenCreative\Everflow\Api\EverflowMetadataGeneral as EverflowMetadata;
 
 class EverflowTimezones extends EverflowApiBase
 {
     private function mapping()
     {
-        // Caches the timezone file output for later usage
+        // Caches the timezone listing output for later usage
         return Cache::remember('everflow-timezone-mapping', 30, function () {
-            return json_decode(file_get_contents(__DIR__ . '/../../timezones.json'), false);
+            return (new EverflowMetadata)->timezones()->timezones;
         });
     }
 
