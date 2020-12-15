@@ -18,7 +18,7 @@ class EverflowTimezones extends EverflowApiBase
 
     public function getTimezone($timezoneNameOrId)
     {
-        // Fetches all TZs from the timezones file
+        // Fetches all TZs
         $timezones = $this->mapping();
 
         // Loops through all timezones looking for one that matches, returns it if found

@@ -18,7 +18,7 @@ class EverflowCurrencies extends EverflowApiBase
 
     public function getCurrency($currencyNameOrId)
     {
-        // Fetches all TZs from the currencies file
+        // Fetches currency data
         $currencies = $this->mapping();
 
         // Loops through all currencies looking for one that matches, returns it if found

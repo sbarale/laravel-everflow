@@ -66,4 +66,9 @@ class EverflowMetadataGeneral extends EverflowApiBase
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('meta/currencies'));
     }
+
+    public function browserlanguages()
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('meta/browserlanguages'));
+    }
 }

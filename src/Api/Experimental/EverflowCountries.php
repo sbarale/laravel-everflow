@@ -18,7 +18,7 @@ class EverflowCountries extends EverflowApiBase
 
     public function getCountry($countryNameCodeOrId)
     {
-        // Fetches all TZs from the countries file
+        // Fetches country data
         $countries = $this->mapping();
 
         // Loops through all countries looking for one that matches, returns it if found
