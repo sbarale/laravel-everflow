@@ -15,5 +15,6 @@ class EverflowExperimental extends EverflowApiBase
         'languages' => EverflowLanguages::class,
         'timezones' => EverflowTimezones::class,
         'currencies' => EverflowCurrencies::class,
+        'browser_languages' => EverflowBrowserLanguages::class,
     ];
 }

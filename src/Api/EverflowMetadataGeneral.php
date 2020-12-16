@@ -7,6 +7,13 @@ use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowMetadataGeneral extends EverflowApiBase
 {
+    /**
+     * Maps endpoints on this API to other APIs
+     */
+    public $childApis = [
+        'languages' => EverflowMetadataGeneralLanguages::class,
+    ];
+
     public function timezones()
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('meta/timezones'));

@@ -11,5 +11,6 @@ class EverflowMetadata extends EverflowApiBase
      */
     public $childApis = [
         'general' => EverflowMetadataGeneral::class,
+        'translations' => EverflowMetadataTranslations::class,
     ];
 }
