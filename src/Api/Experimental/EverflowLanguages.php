@@ -9,11 +9,22 @@ use CodeGreenCreative\Everflow\Api\EverflowMetadataTranslations as EverflowMetad
 
 class EverflowLanguages extends EverflowApiBase
 {
-    public function getLanguage($languageNameCodeOrId)
+    public function getLanguageInfo($languageNameCodeOrId)
     {
         try {
             // Tries to fetch the language directly from backend
             return (new EverflowMetadataLanguages(null, $languageNameCodeOrId))->getLanguageInfo();
+        } catch (\Exception $e) {
+            // Returns 'null' if no matching language is found
+            return null;
+        }
+    }
+
+    public function getLanguageTranslations($languageNameCodeOrId)
+    {
+        try {
+            // Tries to fetch the translation directly from backend
+            return (new EverflowMetadataLanguages(null, $languageNameCodeOrId))->getPortalTranslations();
         } catch (\Exception $e) {
             // Returns 'null' if no matching language is found
             return null;
