@@ -16,11 +16,16 @@ class EverflowAffiliate extends EverflowApiBase
         'reporting' => EverflowAffiliateReporting::class,
     ];
 
-    public function network($relationship = [])
+    public function current($relationship = [])
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/network', [], [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/affiliate', [], [
             'relationship' => $relationship,
         ]));
+    }
+
+    public function network($query = [])
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/network', [], $query));
     }
 
     public function timezone()
