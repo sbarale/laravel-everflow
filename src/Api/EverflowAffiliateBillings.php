@@ -7,6 +7,15 @@ use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowAffiliateBillings extends EverflowApiBase
 {
+    public function invoice($id, $data = [])
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/billings/affiliates/invoices/:id', [
+            'id' => $id,
+        ], [
+            'relationship' => 'all',
+        ]));
+    }
+
     public function invoicestable($data = [])
     {
         $page = isset($data['page']) ? $data['page'] : 1;
