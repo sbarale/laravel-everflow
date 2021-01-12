@@ -19,14 +19,12 @@ class EverflowSearch extends EverflowApiBase
         )->results;
     }
 
-    public function offerstable($data, $relationship = ['visibility'])
+    public function offerstable($data, $query = [])
     {
         return EverflowHttpClient::post(
             EverflowHttpClient::route(':api/offerstable', [
                 'api' => $this->id(),
-            ], [
-                'relationship' => $relationship,
-            ]),
+            ], $query),
             $data
         );
     }
