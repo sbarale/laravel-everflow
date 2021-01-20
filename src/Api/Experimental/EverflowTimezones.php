@@ -16,6 +16,12 @@ class EverflowTimezones extends EverflowApiBase
         });
     }
 
+    public function getAll()
+    {
+        // Fetches all TZs
+        return $this->mapping();
+    }
+
     public function getTimezone($timezoneNameOrId)
     {
         // Fetches all TZs
