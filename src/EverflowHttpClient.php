@@ -54,7 +54,7 @@ class EverflowHttpClient
 
             // HTTP PUT
             case 'put':
-                curl_setopt($handle, CURLOPT_PUT, true);
+                curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'PUT');
                 break;
 
             // HTTP PATCH
@@ -150,7 +150,7 @@ class EverflowHttpClient
         if (isset($response->Error)) {
             throw new \Exception('Error from Everflow API: ' . $response->Error);
         }
-        
+
         // Done
         return $response;
     }
