@@ -16,7 +16,10 @@
         "laravel": {
             "providers": [
                 "CodeGreenCreative\\Everflow\\EverflowServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Everflow": "CodeGreenCreative\\Everflow\\EverflowFacade"
+            }
         }
     }
 }
