@@ -14,6 +14,7 @@ class EverflowAffiliate extends EverflowApiBase
         'offers' => EverflowAffiliateOffers::class,
         'billing' => EverflowAffiliateBillings::class,
         'reporting' => EverflowAffiliateReporting::class,
+        'users' => EverflowAffiliateUsers::class,
     ];
 
     public function current($relationship = [])
