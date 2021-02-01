@@ -21,7 +21,7 @@ to the `aliases` array.
 Publish `everflow.php` config file.
 
 ```shell
-php artisan vendor:publish --provider="CodeGreenCreative\Everflow\EverflowServiceProvider" --tag="config"
+php artisan vendor:publish --provider="CodeGreenCreative\Everflow\EverflowServiceProvider" --tag="everflow-config"
 ```
 
 ## Environment

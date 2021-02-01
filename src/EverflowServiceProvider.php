@@ -59,7 +59,7 @@ class EverflowServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/everflow.php' => config_path('everflow.php'),
-            ], 'everflow_config');
+            ], 'everflow-config');
         }
     }
 }
