@@ -23,8 +23,7 @@ class EverflowCountries extends EverflowApiBase
 
         // Loops through all countries looking for one that matches, returns it if found
         foreach ($countries as $countryInfo) {
-            if (
-                $countryNameCodeOrId == $countryInfo->country_id ||
+            if ($countryNameCodeOrId == $countryInfo->country_id ||
                 strtolower($countryNameCodeOrId) == strtolower($countryInfo->country_code) ||
                 strtolower($countryNameCodeOrId) == strtolower($countryInfo->country_name)
             ) {
@@ -34,5 +33,10 @@ class EverflowCountries extends EverflowApiBase
 
         // Returns 'null' if no matching country is found
         return null;
+    }
+
+    public function get()
+    {
+        return $this->mapping();
     }
 }

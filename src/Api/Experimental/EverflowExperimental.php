@@ -12,6 +12,8 @@ class EverflowExperimental extends EverflowApiBase
     public $childApis = [
         'search' => EverflowSearch::class,
         'countries' => EverflowCountries::class,
+        'regions' => EverflowRegions::class,
+        'cities' => EverflowCities::class,
         'languages' => EverflowLanguages::class,
         'timezones' => EverflowTimezones::class,
         'currencies' => EverflowCurrencies::class,
