@@ -48,6 +48,14 @@ class EverflowNetworkAffiliates extends EverflowApiBase
         ]), $data);
     }
 
+    public function find($field, $value)
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates?filter=:field%3D:value', [
+            'field' => $field,
+            'value' => $value
+        ]));
+    }
+
     public function notifications($pageSize = 5)
     {
         // Fetch the Affiliate's users
@@ -60,7 +68,7 @@ class EverflowNetworkAffiliates extends EverflowApiBase
 
         // Gets the first user and passes it to the notifications API call
         $user = $users[0];
-        
+
         return $this->asAffiliate($this->id(), $user->network_affiliate_user_id)->users($user->network_affiliate_user_id)->notifications($pageSize);
     }
 }
