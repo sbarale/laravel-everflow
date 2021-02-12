@@ -155,7 +155,8 @@ class EverflowHttpClient
         return $response;
     }
 
-    public static function route($route, $data = [], $query = []) {
+    public static function route($route, $data = [], $query = null)
+    {
         // Replaces route fragments
         $search = [];
         $replace = [];
@@ -165,22 +166,26 @@ class EverflowHttpClient
         }
 
         // Handles query string parameters
-        $queryParameters = [];
-        foreach ($query as $k => $v) {
-            if (is_array($v)) {
-                // Handles arrays in values
-                $vEncoded = implode(',', array_map('urlencode', $v));
-            } else {
-                // Encodes all other types of values
-                $vEncoded = urlencode($v);
+        if (is_array($query)) {
+            $queryParameters = [];
+            foreach ($query as $k => $v) {
+                if (is_array($v)) {
+                    // Handles arrays in values
+                    $vEncoded = implode(',', array_map('urlencode', $v));
+                } else {
+                    // Encodes all other types of values
+                    $vEncoded = urlencode($v);
+                }
+
+                // Adds finished items
+                $queryParameters[] = urlencode($k) . '=' . $vEncoded;
             }
 
-            // Adds finished items
-            $queryParameters[] = urlencode($k) . '=' . $vEncoded;
+            // Builds query string if needed
+            $queryString = (count($query) > 0) ? ('?' . implode('&', $queryParameters)) : '';
+        } elseif (!is_null($query)) {
+            $queryString = '?' . $query;
         }
-
-        // Builds query string if needed
-        $queryString = (count($query) > 0) ? ('?' . implode('&', $queryParameters)) : '';
 
         // Returns built URL
         return str_replace($search, $replace, $route) . $queryString;

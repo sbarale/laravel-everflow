@@ -24,11 +24,11 @@ class EverflowNetworkAffiliates extends EverflowApiBase
         return $this->pageAll(EverflowHttpClient::route('networks/affiliates'), 'affiliates');
     }
 
-    public function get()
+    public function get($relationships = [])
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/affiliates/:affiliateId', [
             'affiliateId' => $this->id(),
-        ]));
+        ], $relationships));
     }
 
     public function create($data = [])
