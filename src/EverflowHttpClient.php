@@ -166,6 +166,7 @@ class EverflowHttpClient
         }
 
         // Handles query string parameters
+        $queryString = '';
         if (is_array($query)) {
             $queryParameters = [];
             foreach ($query as $k => $v) {
