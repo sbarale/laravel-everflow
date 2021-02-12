@@ -3,6 +3,7 @@
 namespace CodeGreenCreative\Everflow\Api;
 
 use CodeGreenCreative\Everflow\EverflowApiBase;
+use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowNetwork extends EverflowApiBase
 {
@@ -22,4 +23,9 @@ class EverflowNetwork extends EverflowApiBase
         'reporting' => EverflowNetworkReporting::class,
         'settings' => EverflowNetworkSettings::class,
     ];
+
+    public function get($options = null)
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks', [], $options));
+    }
 }

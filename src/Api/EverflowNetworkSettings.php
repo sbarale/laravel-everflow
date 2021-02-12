@@ -28,4 +28,14 @@ class EverflowNetworkSettings extends EverflowApiBase
         // Returns the fields
         return $fields->all();
     }
+
+    /**
+     * Get Network settings address
+     *
+     * @return
+     */
+    public function address()
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/settings/address'));
+    }
 }

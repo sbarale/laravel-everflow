@@ -7,9 +7,9 @@ use CodeGreenCreative\Everflow\EverflowHttpClient;
 
 class EverflowAffiliateBillings extends EverflowApiBase
 {
-    public function invoice($id, $data = [])
+    public function invoice($id)
     {
-        return EverflowHttpClient::get(EverflowHttpClient::route('networks/billings/affiliates/invoices/:id', [
+        return EverflowHttpClient::get(EverflowHttpClient::route('affiliates/billings/affiliates/invoices/:id', [
             'id' => $id,
         ], [
             'relationship' => 'all',
