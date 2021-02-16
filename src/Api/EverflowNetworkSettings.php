@@ -38,4 +38,14 @@ class EverflowNetworkSettings extends EverflowApiBase
     {
         return EverflowHttpClient::get(EverflowHttpClient::route('networks/settings/address'));
     }
+
+    /**
+     * Get Network billing
+     *
+     * @return
+     */
+    public function billing()
+    {
+        return EverflowHttpClient::get(EverflowHttpClient::route('networks/settings/billing'));
+    }
 }
