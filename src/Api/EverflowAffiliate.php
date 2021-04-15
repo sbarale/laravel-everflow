@@ -12,5 +12,6 @@ class EverflowAffiliate extends EverflowApiBase
     public $childApis = [
         'offers' => EverflowAffiliateOffers::class,
         'reporting' => EverflowAffiliateReporting::class,
+        'pixels' => EverflowAffiliatePixels::class
     ];
 }
