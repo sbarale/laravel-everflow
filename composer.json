@@ -1,5 +1,5 @@
 {
-    "name": "codegreencreative/laravel-everflow",
+    "name": "sbarale/laravel-everflow",
     "description": "Laravel wrapper for Everflow API",
     "keywords": ["laravel", "everflow", "api"],
     "license": "MIT",

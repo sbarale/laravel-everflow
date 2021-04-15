@@ -11,10 +11,11 @@ class EverflowAffiliate extends EverflowApiBase
      * Maps endpoints on this API to other APIs
      */
     public $childApis = [
-        'offers' => EverflowAffiliateOffers::class,
-        'billing' => EverflowAffiliateBillings::class,
+        'offers'    => EverflowAffiliateOffers::class,
+        'billing'   => EverflowAffiliateBillings::class,
         'reporting' => EverflowAffiliateReporting::class,
-        'users' => EverflowAffiliateUsers::class,
+        'users'     => EverflowAffiliateUsers::class,
+        'pixels'    => EverflowAffiliatePixels::class
     ];
 
     public function current($relationship = [])

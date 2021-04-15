@@ -1,12 +1,15 @@
 # Laravel Everflow
+
 Laravel wrapper for Everflow API
 
 ## Installation
 
 ```shell
-composer require codegreencreative/laravel-everflow:^1.0
+composer require sbarale/laravel-everflow:^1.0
 ```
-For Laravel 5.6+, this package uses service provider and alias auto discovery. You can still add the service provider and alias below in `config/app.php`.
+
+For Laravel 5.6+, this package uses service provider and alias auto discovery. You can still add the service provider
+and alias below in `config/app.php`.
 
     CodeGreenCreative\Everflow\EverflowServiceProvider::class,
 
