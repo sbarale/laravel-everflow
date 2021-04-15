@@ -10,7 +10,8 @@ class EverflowAffiliate extends EverflowApiBase
      * Maps endpoints on this API to other APIs
      */
     public $childApis = [
-        'offers' => EverflowAffiliateOffers::class,
+        'offers'    => EverflowAffiliateOffers::class,
         'reporting' => EverflowAffiliateReporting::class,
+        'pixels'    => EverflowAffiliatePixels::class
     ];
 }
